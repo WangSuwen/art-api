@@ -1,6 +1,6 @@
 const express = require('express');
 const validate = require('express-validation');
-const expressJwt = require('express-jwt');
+const jwt = require('jsonwebtoken');
 const paramValidation = require('../param-validation/user');
 const authCtrl = require('../controllers/auth.controller');
 const config = require('../config/env');
@@ -14,6 +14,12 @@ router.route('/login')
 /** GET /api/auth/random-number - Protected route,
  * needs token returned by the above as header. Authorization: Bearer {token} */
 router.route('/random-number')
-  .get(expressJwt({ secret: config.jwtSecret }), authCtrl.getRandomNumber);
+  .get((req, res, next) => {
+    /**
+     *   token 登录鉴权
+     */
+    jwt.verify(req.cookies.token, config.jwtSecret);
+    next();
+  }, authCtrl.getRandomNumber);
 
 module.exports = router;

@@ -21,9 +21,7 @@ function login(req, res, next) {
   // Ideally you'll fetch this = require(the db
   // Idea here was to show how jwt works with simplicity
   if (req.query.username === user.username && req.query.password === user.password) {
-    const token = jwt.sign({
-      username: user.username
-    }, config.jwtSecret);
+    const token = jwt.sign({ username: user.username }, config.jwtSecret);
     res.cookie('token', token);
     return res.json({
       token,
@@ -44,7 +42,6 @@ function login(req, res, next) {
 function getRandomNumber(req, res) {
   // req.user is assigned by jwt middleware if valid token is provided
   return res.json({
-    user: req.user,
     num: Math.random() * 100
   });
 }
