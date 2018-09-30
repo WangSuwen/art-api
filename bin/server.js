@@ -1,4 +1,4 @@
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 // const util = require('util');
 const config = require('../config/env');
 const app = require('../config/express-conf');
@@ -9,13 +9,13 @@ const debug = require('debug')('express-mongoose-es6-rest-api:index');
 Promise = require('bluebird'); // eslint-disable-line no-global-assign
 
 // plugin bluebird promise in mongoose
-/* mongoose.Promise = Promise; */
+mongoose.Promise = Promise;
 
 // connect to mongo db
-/* mongoose.connect(config.db, { server: { socketOptions: { keepAlive: 1 } } });
+mongoose.connect(config.db, { server: { socketOptions: { keepAlive: 1 } } });
 mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${config.db}`);
-}); */
+});
 
 // print mongoose logs in dev env
 /* if (config.MONGOOSE_DEBUG) {
