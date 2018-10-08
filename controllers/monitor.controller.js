@@ -28,6 +28,8 @@ function create(req, res, next) {
       col: req.body.col,
       errorStack: req.body.errorStack,
       pageUrl: req.body.pageUrl,
+      userAgent: req.headers['user-agent'],
+      reqIp: req.ip
     });
 
   monitor.save()

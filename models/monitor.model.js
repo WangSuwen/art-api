@@ -35,6 +35,12 @@ const MonitorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  userAgent: {
+    type: String
+  },
+  reqIp: {
+    type: String
+  },
   /* mobileNumber: {
     type: String,
     required: true,
