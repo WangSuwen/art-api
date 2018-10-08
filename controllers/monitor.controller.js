@@ -3,6 +3,7 @@
  */
 
 const Monitor = require('../models/monitor.model');
+const result = require('../util/result');
 
 // /**
 //  * Get user
@@ -30,7 +31,7 @@ function create(req, res, next) {
     });
 
   monitor.save()
-    .then(savedMonitor => res.json(savedMonitor))
+    .then(savedMonitor => result.success(res, savedMonitor))
     .catch(e => {
       console.log(`报错了：${e}`);
       next(e)
@@ -62,7 +63,9 @@ function create(req, res, next) {
 function list(req, res, next) {
   const { limit = 10, skip = 0 } = req.query;
   Monitor.list({ limit, skip })
-    .then(monitors => res.json(monitors))
+    .then(monitors => {
+      result.success(res, monitors)
+    })
     .catch(e => next(e));
 }
 
