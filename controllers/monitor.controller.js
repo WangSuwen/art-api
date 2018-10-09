@@ -68,7 +68,10 @@ function list(req, res, next) {
     .then(monitors => {
       result.success(res, monitors)
     })
-    .catch(e => next(e));
+    .catch(e => { 
+      console.log(`获取Monitor列表报错了：${e}`);
+      next(e);
+    });
 }
 
 // /**
