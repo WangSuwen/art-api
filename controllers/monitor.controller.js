@@ -66,7 +66,8 @@ function list(req, res, next) {
   const { limit = 10, skip = 0 } = req.query;
   Monitor.list({ limit, skip })
     .then(monitors => {
-      result.success(res, monitors)
+      console.log('获取Monitor成功--');
+      result.success(res, monitors);
     })
     .catch(e => { 
       console.log(`获取Monitor列表报错了：${e}`);
