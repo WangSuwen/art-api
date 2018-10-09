@@ -35,9 +35,11 @@ const MonitorSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // 浏览器信息
   userAgent: {
     type: String
   },
+  // 用户IP
   reqIp: {
     type: String
   },
