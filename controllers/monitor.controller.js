@@ -4,6 +4,7 @@
 
 const Monitor = require('../models/monitor.model');
 const result = require('../util/result');
+const Daos = require('../daos');
 
 // /**
 //  * Get user
@@ -63,16 +64,21 @@ function create(req, res, next) {
  * @returns {User[]}
  */
 function list(req, res, next) {
-  const { limit = 10, skip = 0 } = req.query;
-  Monitor.list({ limit, skip })
-    .then(monitors => {
-      console.log('获取Monitor成功--');
-      result.success(res, monitors);
-    })
-    .catch(e => { 
-      console.log(`获取Monitor列表报错了：${e}`);
-      next(e);
-    });
+  const { limit = 10, currentPage = 1 } = req.query;
+    Daos.list(Monitor, limit, (currentPage - 1) * limit)
+      .then(datas => {
+        console.log('获取Monitor成功--');
+        result.success(res, {
+          list: datas[1],
+          currentPage: +currentPage,
+          limit: limit,
+          pageSize: Math.ceil(datas[0] / limit)
+        });
+      })
+      .catch(e => { 
+        console.log(`获取列表报错了：${e}`);
+        next(e);
+      });
 }
 
 // /**
