@@ -1,3 +1,4 @@
+## 定义一个 query-type，一个 Link-type
 type Query {
   info: String!
   feed: [Link!]!
