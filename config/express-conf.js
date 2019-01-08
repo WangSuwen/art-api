@@ -12,8 +12,21 @@ const winstonInstance = require('../config/winston');
 const routes = require('../routes/index');
 const config = require('../config/env');
 const APIError = require('../helpers/APIError');
+const socketIO = require('../socket');
 
 const app = express();
+// app.use(function(req, res, next) {
+//   res.header('Access-Control-Allow-Headers', 'X-Token');
+//   next();
+// });
+
+/**
+ * SocketIO ---START
+ */
+socketIO.init(app);
+/**
+ * SocketIO ---END
+ */
 
 if (config.env === 'development') {
   app.use(logger('dev'));

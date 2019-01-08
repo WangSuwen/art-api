@@ -5,7 +5,7 @@ const Daos = {
 
   },
   getById(model, id) {
-    return model.findById(id);
+    return model.findById(id).exec();
   },
   list (model, limit, skip, sort = {createdAt: -1}) {
     return Promise.all([

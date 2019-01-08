@@ -36,7 +36,7 @@ const MonitorSchema = new mongoose.Schema({
     required: true
   },
   // 浏览器信息
-  userAgent: {
+  monitorAgent: {
     type: String
   },
   // 用户IP
@@ -72,18 +72,18 @@ MonitorSchema.method({
  */
 MonitorSchema.statics = {
   /**
-   * Get user
-   * @param {ObjectId} id - The objectId of user.
+   * Get monitor
+   * @param {ObjectId} id - The objectId of monitor.
    * @returns {Promise<User, APIError>}
    */
   get(id) {
     return this.findById(id)
       .exec()
-      .then((user) => {
-        if (user) {
-          return user;
+      .then((monitor) => {
+        if (monitor) {
+          return monitor;
         }
-        const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
+        const err = new APIError('No such monitor exists!', httpStatus.NOT_FOUND);
         return Promise.reject(err);
       });
   },
