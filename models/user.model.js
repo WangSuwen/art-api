@@ -16,6 +16,24 @@ const UserSchema = new mongoose.Schema({
     required: true,
     match: [/^[1-9][0-9]{9}$/, 'The value of path {PATH} ({VALUE}) is not a valid mobile number.']
   },
+  password: {
+    type: String,
+    required: true
+  },
+  // 头像
+  avatar: {
+    type: String,
+    required: false
+  },
+  introduction: {
+    type: String,
+    required: false
+  },
+  // 权限
+  roles: {
+    type: String,
+    default: 'user'
+  },
   createdAt: {
     type: Date,
     default: Date.now

@@ -1,5 +1,6 @@
 const codeMap = {
-  CUSTOM_ERROR: { code: 10000, msg: '自定义错误'}
+  CUSTOM_ERROR: { code: 10000, msg: '自定义错误'},
+  SYSTEM_ERROR: { code: 10001, msg: '系统错误'},
 };
 
 const Result = {
@@ -10,13 +11,29 @@ const Result = {
       msg: msg || '操作成功'
     });
   },
-  failed: function(res, errMsg, code) {
+  failed: function(res, errMsg, errStatus) {
     return res.json({
-      code: code.code,
-      msg: errMsg || (code && codeMap[code]['msg']) || '操作失败'
+      code: errStatus['code'],
+      msg: errMsg || (errStatus && errStatus['msg']) || '操作失败'
     });
   },
-  ...codeMap
+  ...codeMap,
+  /**
+   * 
+   * @param {*} data 
+   * @param {* Array} formater 
+   */
+  formatResData: function(data, formater = []) {
+    if (formater.length) {
+      const result = {};
+      formater.forEach(f => {
+        result[f] = data._doc[f];
+      });
+      return result;
+    } else {
+      return data;
+    }
+  }
 };
 
 module.exports = Result;

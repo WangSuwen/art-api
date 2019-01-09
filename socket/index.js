@@ -6,12 +6,12 @@ const socketIO = {
     server = require('http').Server(app);
     io = require('socket.io')(server);
     server.listen(8008);
-    io.on('connection', this.onConnect);
+    io.on('connection', this.onConnect.bind(this));
   },
   onConnect (socket) {
     _socket = socket;
     socket.emit('hello-client', { 'server-msg': '与服务器连接成功' });
-    socket.on('user-to-user', onUserToUser);
+    socket.on('user-to-user', this.onUserToUser);
     socket.on('hello-server', function (data) {
       console.log(data);
       socket.emit('server-response', `服务端接收到消息：${data.my}`);

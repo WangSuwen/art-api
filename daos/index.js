@@ -12,6 +12,13 @@ const Daos = {
       model.estimatedDocumentCount(),
       model.find().sort(sort).skip(skip).limit(limit).exec()
     ]);
+  },
+  /**
+   * @param {*} model 
+   * @param {*Object} query 
+   */
+  getOne(model, query) {
+    return model.findOne(query).exec();
   }
 };
 

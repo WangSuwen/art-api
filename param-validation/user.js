@@ -22,9 +22,15 @@ module.exports =  {
 
   // POST /api/auth/login
   login: {
-    query: {
+    body: {
       username: Joi.string().required(),
       password: Joi.string().required()
+    }
+  },
+  menu: {
+    body: {
+      userId: Joi.string().required(),
+      menus: Joi.array().required()
     }
   }
 };

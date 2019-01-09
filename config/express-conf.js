@@ -42,8 +42,20 @@ app.use(compress());
 // secure apps by setting various HTTP headers
 app.use(helmet());
 
+const whitelist = ['http://localhost:9527', 'http://127.0.0.1:9527']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true
+}
+
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors());
+app.use(cors(corsOptions));
 
 // enable detailed API logging in dev env
 if (config.env === 'development') {
@@ -90,8 +102,10 @@ if (config.env !== 'test') {
 // error handler, send stacktrace only during development
 app.use((err, req, res, next) => // eslint-disable-line no-unused-vars
   res.status(err.status).json({
-    message: err.isPublic ? err.message : httpStatus[err.status],
-    stack: config.env === 'development' ? err.stack : {}
+    msg: err.isPublic ? err.message : httpStatus[err.status],
+    stack: config.env === 'development' ? err.stack : {},
+    code: err.status,
+    data: null
   })
 );
 
