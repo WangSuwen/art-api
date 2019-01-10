@@ -14,6 +14,13 @@ const Daos = {
     ]);
   },
   /**
+   * @param {Model} model 
+   * @param {Object} query 
+   */
+  getAll(model, query) {
+    return model.find(query).exec();
+  },
+  /**
    * @param {*} model 
    * @param {*Object} query 
    */

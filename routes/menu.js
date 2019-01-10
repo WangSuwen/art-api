@@ -9,4 +9,6 @@ const router = express.Router(); // eslint-disable-line new-cap
 router.route('/createMenu')
   .post(validate(paramValidation.menu), menuCtrl.create);
 
+router.get('/list', validate(paramValidation.menuList), menuCtrl.list);
+
 module.exports = router;

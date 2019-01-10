@@ -33,7 +33,7 @@ function login(req, res, next) {
           const token = jwt.sign({ username: user.username }, config.jwtSecret);
           resu = {
             token,
-            ...result.formatResData(user, ['avatar', 'name', 'role'])
+            ...result.formatResData(user, ['avatar', 'name', 'role', '_id'])
           };
           return resolve({resu, uId: user._id});
         }

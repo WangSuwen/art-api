@@ -40,21 +40,14 @@ function update(req, res, next) {
 
 /**
  * Get menu list.
- * @property {number} req.query.currentPage - Number of menus to be skipped.
- * @property {number} req.query.limit - Limit number of menus to be returned.
+ * @property {String} userId 用户ID
  * @returns {Menu[]}
  */
 function list(req, res, next) {
-  const { limit = 2, currentPage = 1 } = req.query;
-  Daos.list(Menu, +limit, (currentPage - 1) * limit)
+  Daos.getOne(Menu, {userId: req.query.userId})
       .then(datas => {
         console.log('获取Menu成功--');
-        result.success(res, {
-          list: datas[1],
-          currentPage: +currentPage,
-          limit: limit,
-          pageSize: Math.ceil(datas[0] / limit)
-        });
+        result.success(res, result.formatResData(datas, ['menus']));
       })
       .catch(e => { 
         console.log(`获取列表报错了：${e}`);

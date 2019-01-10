@@ -31,7 +31,7 @@ const Result = {
       });
       return result;
     } else {
-      return data;
+      return data._doc;
     }
   }
 };

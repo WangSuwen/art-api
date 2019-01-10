@@ -32,5 +32,10 @@ module.exports =  {
       userId: Joi.string().required(),
       menus: Joi.array().required()
     }
+  },
+  menuList: {
+    query: {
+      userId: Joi.string().required()
+    }
   }
 };
