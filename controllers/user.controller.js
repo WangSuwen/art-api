@@ -62,12 +62,15 @@ function update(req, res, next) {
  * @returns {User[]}
  */
 function list(req, res, next) {
-  const { limit = 2, currentPage = 1 } = req.query;
+  const { limit = 10, currentPage = 1 } = req.query;
   Daos.list(User, +limit, (currentPage - 1) * limit)
       .then(datas => {
         console.log('获取User成功--');
+        const userList = datas[1].map(user => {
+          return result.formatResData(user, ['mobileNumber', 'avatar', 'introduction', 'name', '_id']); 
+        });
         result.success(res, {
-          list: datas[1],
+          list: userList,
           currentPage: +currentPage,
           limit: limit,
           pageSize: Math.ceil(datas[0] / limit)

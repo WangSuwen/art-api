@@ -21,7 +21,7 @@ const Result = {
   /**
    * 
    * @param {*} data 
-   * @param {* Array} formater 
+   * @param {Array} formater 
    */
   formatResData: function(data, formater = []) {
     if (formater.length) {
