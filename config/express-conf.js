@@ -42,7 +42,7 @@ app.use(compress());
 // secure apps by setting various HTTP headers
 app.use(helmet());
 
-const whitelist = ['http://localhost:9527', 'http://127.0.0.1:9527']
+const whitelist = ['*', 'http://localhost:9527', 'http://127.0.0.1:9527']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {

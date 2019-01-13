@@ -35,7 +35,7 @@ function login(req, res, next) {
             token,
             ...result.formatResData(user, ['avatar', 'name', 'role', '_id'])
           };
-          return resolve({resu, uId: user._id});
+          return resolve(resu);
         }
         const err = new APIError('Authentication error', httpStatus.UNAUTHORIZED);
         next(err);
@@ -45,10 +45,10 @@ function login(req, res, next) {
     return new Promise((reso, rej) => {
       Daos.getOne(Menu, {userId: resuUser.uId})
       .then(menus => {
-        res.cookie('access-token', resuUser.token,  { expires: new Date(Date.now() + 900000), httpOnly: true });
+        res.cookie('access_token', resuUser.token,  { expires: new Date(Date.now() + 900000), httpOnly: true });
         return result.success(res, {
-          ...resuUser.resu,
-          menus: menus._doc.menus
+          ...resuUser,
+          menus: menus ? menus._doc.menus : []
         });
       })
       .catch(e => rej(e));

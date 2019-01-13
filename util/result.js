@@ -1,6 +1,7 @@
 const codeMap = {
   CUSTOM_ERROR: { code: 10000, msg: '自定义错误'},
   SYSTEM_ERROR: { code: 10001, msg: '系统错误'},
+  AUTH_FAILED: { code: 20000, msg: '登录已过期'}
 };
 
 const Result = {
@@ -11,10 +12,10 @@ const Result = {
       msg: msg || '操作成功'
     });
   },
-  failed: function(res, errMsg, errStatus) {
+  failed: function(res, errMsg) {
     return res.json({
-      code: errStatus['code'],
-      msg: errMsg || (errStatus && errStatus['msg']) || '操作失败'
+      code: errMsg && errMsg['code'] || codeMap.SYSTEM_ERROR.code,
+      msg: errMsg && errMsg.msg || codeMap.SYSTEM_ERROR.msg
     });
   },
   ...codeMap,

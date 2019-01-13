@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema({
     required: false
   },
   // 权限
-  roles: {
+  role: {
     type: String,
     default: 'user'
   },

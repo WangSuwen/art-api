@@ -31,7 +31,12 @@ function get(req, res) {
 function create(req, res, next) {
   const user = new User({
     username: req.body.username,
-    mobileNumber: req.body.mobileNumber
+    mobileNumber: req.body.mobileNumber,
+    password: req.body.password,
+    name: req.body.name,
+    avatar: req.body.avatar,
+    introduction: req.body.introduction,
+    roles: req.body.roles || 'user'
   });
 
   user.save()
@@ -65,7 +70,7 @@ function list(req, res, next) {
   const { limit = 10, currentPage = 1 } = req.query;
   Daos.list(User, +limit, (currentPage - 1) * limit)
       .then(datas => {
-        console.log('获取User成功--');
+        console.log('获取UserList成功--');
         const userList = datas[1].map(user => {
           return result.formatResData(user, ['mobileNumber', 'avatar', 'introduction', 'name', '_id']); 
         });

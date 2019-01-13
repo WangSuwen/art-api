@@ -5,7 +5,12 @@ module.exports =  {
   createUser: {
     body: {
       username: Joi.string().required(),
-      mobileNumber: Joi.number().required()
+      mobileNumber: Joi.number().required(),
+      password: Joi.number().required(),
+      name: Joi.string().required(),
+      avatar: Joi.string().required(),
+      introduction: Joi.string(),
+      roles: Joi.string()
     }
   },
 

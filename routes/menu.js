@@ -6,7 +6,7 @@ const config = require('../config/env');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
-router.route('/createMenu')
+router.route('/')
   .post(validate(paramValidation.menu), menuCtrl.create);
 
 router.get('/list', validate(paramValidation.menuList), menuCtrl.list);

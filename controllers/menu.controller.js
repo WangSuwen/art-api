@@ -47,7 +47,7 @@ function list(req, res, next) {
   Daos.getOne(Menu, {userId: req.query.userId})
       .then(datas => {
         console.log('获取Menu成功--');
-        result.success(res, result.formatResData(datas, ['menus']));
+        result.success(res, datas ? result.formatResData(datas, ['menus']) : []);
       })
       .catch(e => { 
         console.log(`获取列表报错了：${e}`);
