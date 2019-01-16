@@ -1,13 +1,20 @@
 let server = null;
 let io = null;
 let _socket = null;
+let chat = null;
 const socketIO = {
   init(app) {
     server = require('http').Server(app);
     io = require('socket.io')(server);
     server.listen(8008);
     io.on('connection', this.onConnect.bind(this));
+    chat = io.of('chat');
+    chat.on('connection', this.onChatConnect.bind(this))
   },
+  /**
+   * 根链接
+   * @param {Socket} socket 
+   */
   onConnect (socket) {
     _socket = socket;
     socket.emit('hello-client', { 'server-msg': '与服务器连接成功' });
@@ -16,6 +23,25 @@ const socketIO = {
       console.log(data);
       socket.emit('server-response', `服务端接收到消息：${data.my}`);
     });
+  },
+  /**
+   * 聊天链接
+   * @param {Socket} socket 
+   */
+  onChatConnect (socket) {
+    const that = this;
+    socket.emit('hello-client', { 'server-msg': '聊天链接--与服务器连接成功' });
+    // 接收到用户发来的消息
+    socket.on('chat:user-sendMsg', function (msg) {
+      that.receiveUserSendMsg(socket, msg);
+    });
+    socket.on('hello-server', function (data) {
+      socket.emit('server-response', `聊天链接--服务端接收到消息：${data.my}`);
+    });
+  },
+  receiveUserSendMsg (socket, msg) {
+    const socketType = `chat:server-sendMsg-to-user:${msg.receiveUserId}`;
+    socket.emit(socketType, msg.content);
   },
   /**
    * 单用户发给单用户的
