@@ -41,14 +41,14 @@ app.use(compress());
 
 // secure apps by setting various HTTP headers
 app.use(helmet());
-
+let getterOrigin;
 const whitelist = ['loveruoxi.com', 'http://localhost:9527', 'http://127.0.0.1:9527']
 var corsOptions = {
   origin: function (origin, callback) {
     let reg;
     let isCORS = false;
     for (let i = 0; i < whitelist.length; i++) {
-      if (reg = new RegExp(whitelist[i]), reg.test(origin)) {
+      if (reg = new RegExp(whitelist[i]), reg.test(getterOrigin)) {
         isCORS = false;
         callback(null, true);
         break;
@@ -68,7 +68,10 @@ var corsOptions = {
 }
 
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors(corsOptions));
+app.use(function (req, res, next) {
+  getterOrigin = req.headers.origin || req.headers.referer;
+  next();
+}, cors(corsOptions));
 
 // enable detailed API logging in dev env
 if (config.env === 'development') {
