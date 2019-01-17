@@ -63,6 +63,7 @@ var corsOptions = {
     //   callback(new Error('Not allowed by CORS'))
     // }
   },
+  methods: ['OPTION', 'GET', 'PUT', 'POST'],
   credentials: true
 }
 
