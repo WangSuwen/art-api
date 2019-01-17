@@ -42,14 +42,22 @@ app.use(compress());
 // secure apps by setting various HTTP headers
 app.use(helmet());
 
-const whitelist = ['*.loveruoxi.com', 'http://localhost:9527', 'http://127.0.0.1:9527']
+const whitelist = ['loveruoxi.com', 'http://localhost:9527', 'http://127.0.0.1:9527']
 var corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
+    let reg;
+    for (let i = 0; i < whitelist.length; i++) {
+      if (reg = new RegExp(whitelist[i]), reg.test(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))  
+      }
     }
+    // if (whitelist.indexOf(origin) !== -1) {
+    //   callback(null, true)
+    // } else {
+    //   callback(new Error('Not allowed by CORS'))
+    // }
   },
   credentials: true
 }
