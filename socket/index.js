@@ -41,6 +41,7 @@ const socketIO = {
   },
   receiveUserSendMsg (socket, msg) {
     const socketType = `chat:server-sendMsg-to-user:${msg.receiveUserId}`;
+    console.log('将信息发送给目标用户：', socketType);
     socket.emit(socketType, msg.content);
   },
   /**
