@@ -42,7 +42,10 @@ const socketIO = {
   receiveUserSendMsg (socket, msg) {
     const socketType = `chat:server-sendMsg-to-user:${msg.receiveUserId}`;
     console.log('将信息发送给目标用户：', socketType);
-    socket.emit(socketType, msg.content);
+    /**
+     * 必须通过 broadcast  进行广播，才能将消息发送出去
+     */
+    socket.broadcast.emit(socketType, msg.content);
   },
   /**
    * 单用户发给单用户的
