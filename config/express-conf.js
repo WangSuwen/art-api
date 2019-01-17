@@ -46,13 +46,17 @@ const whitelist = ['loveruoxi.com', 'http://localhost:9527', 'http://127.0.0.1:9
 var corsOptions = {
   origin: function (origin, callback) {
     let reg;
+    let isCORS = false;
     for (let i = 0; i < whitelist.length; i++) {
       if (reg = new RegExp(whitelist[i]), reg.test(origin)) {
-        callback(null, true)
+        isCORS = false;
+        callback(null, true);
+        break;
       } else {
-        callback(new Error('Not allowed by CORS'))  
+        isCORS = true;
       }
     }
+    isCORS && callback(new Error('Not allowed by CORS'))  
     // if (whitelist.indexOf(origin) !== -1) {
     //   callback(null, true)
     // } else {
