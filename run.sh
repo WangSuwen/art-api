@@ -9,4 +9,4 @@ fi
 echo "npm installing..."
 npm i
 echo "server starting..."
-pm2 start ./bin/server.js --name artApi --log /var/log/art-api
+pm2 start ./bin/server.js --name artApi
