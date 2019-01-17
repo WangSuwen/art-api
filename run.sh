@@ -1,5 +1,6 @@
 #!/bin/bash
 git pull origin master
+touch /var/log/art-api/$DATE.log
 pm2 stop artApi
 pm2 delete artApi
 NODE_MODULES="node_modules"
@@ -9,4 +10,4 @@ fi
 echo "npm installing..."
 npm i
 echo "server starting..."
-pm2 start ./bin/server.js --name artApi
+pm2 start ./bin/server.js --name artApi --log /var/log/art-api/$DATE.log
