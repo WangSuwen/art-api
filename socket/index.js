@@ -7,6 +7,7 @@ const socketIO = {
     server = require('http').Server(app);
     io = require('socket.io')(server);
     server.listen(8008);
+
     io.on('connection', this.onConnect.bind(this));
     chat = io.of('chat');
     chat.on('connection', this.onChatConnect.bind(this))
@@ -18,7 +19,6 @@ const socketIO = {
   onConnect (socket) {
     _socket = socket;
     socket.emit('hello-client', { 'server-msg': '与服务器连接成功' });
-    socket.on('user-to-user', this.onUserToUser);
     socket.on('hello-server', function (data) {
       console.log(data);
       socket.emit('server-response', `服务端接收到消息：${data.my}`);
@@ -46,22 +46,6 @@ const socketIO = {
      * 必须通过 broadcast  进行广播，才能将消息发送出去
      */
     socket.broadcast.emit(socketType, msg);
-  },
-  /**
-   * 单用户发给单用户的
-   * @param {*} data 
-   * {
-   *  fromUid: '发送用户的ID'
-   *  toUid: '目标用户的ID'
-   *  msg: '发送的消息'
-   * }
-   */
-  onUserToUser (data) {
-    console.log(`接收到某个用户发送给另一个用户的信息：${data}`);
-    _socket.emit(`user-to-user_${data.toUid}`, {
-      fromUid: data.fromUid,
-      msg: data.msg
-    });
   }
 }
 
