@@ -74,8 +74,12 @@ function list(req, res, next) {
         const userList = datas[1].map(user => {
           return result.formatResData(user, ['mobileNumber', 'avatar', 'introduction', 'name', '_id']); 
         });
+        const userObj = {};
+        userList.forEach(user => {
+          userObj[user._id] = user;
+        });
         result.success(res, {
-          list: userList,
+          list: userObj,
           currentPage: +currentPage,
           limit: limit,
           pageSize: Math.ceil(datas[0] / limit)
