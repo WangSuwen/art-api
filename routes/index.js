@@ -1,7 +1,8 @@
 const express = require('express');
 const userRoutes = require('./user');
 const authRoutes = require('./auth');
-const menuRoutes = require('./menu');
+const userMenuRoutes = require('./userMenu');
+const menusRoutes = require('./menus');
 const monitorRoutes = require('./monitor');
 const { loginCheck } = require('./loginStatusCheck');
 
@@ -18,8 +19,10 @@ router.use('/users', userRoutes);
 // mount auth routes at /auth
 router.use('/auth', authRoutes);
 
-// 侧边栏菜单
-router.use('/menu', loginCheck, menuRoutes);
+// 用户有权限的 菜单
+router.use('/userMenu', loginCheck, userMenuRoutes);
+// 菜单相关
+router.use('/menus', loginCheck, menusRoutes);
 // 错误监控
 router.use('/monitor', monitorRoutes);
 

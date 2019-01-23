@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
 const User = require('../models/user.model');
-const Menu = require('../models/menu.model');
+const userMenu = require('../models/userMenu.model');
 const result = require('../util/result');
 const Daos = require('../daos');
 const Promise = require('bluebird');
@@ -43,7 +43,7 @@ function login(req, res, next) {
       .catch(e => reject(e));
   }).then(resuUser => {
     return new Promise((reso, rej) => {
-      Daos.getOne(Menu, {userId: resuUser.uId})
+      Daos.getOne(userMenu, {userId: resuUser.uId})
       .then(menus => {
         res.cookie('access_token', resuUser.token,  { expires: new Date(Date.now() + 900000), httpOnly: true });
         return result.success(res, {

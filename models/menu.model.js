@@ -4,14 +4,15 @@ const mongoose = require('mongoose');
  * Monitor Schema
  */
 const MenuSchema = new mongoose.Schema({
-  userId: {
+  // 菜单名
+  menuName: {
     type: String,
     required: true
   },
-  // 权限
-  menus: {
-    type: Array,
-    default: [] // ['/login', '/abcd', '/efg']
+  // 菜单值
+  menuValue: {
+    type: String,
+    required: true
   },
   createdAt: {
     type: Date,
@@ -22,4 +23,4 @@ const MenuSchema = new mongoose.Schema({
 /**
  * @typedef Menu
  */
-module.exports = mongoose.model('Menu', MenuSchema);
+module.exports = mongoose.model('menu', MenuSchema);
