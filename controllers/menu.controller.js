@@ -21,7 +21,26 @@ function create(req, res, next) {
       next(e)
     });
 }
-
+// 
+function update(req, res, next) {
+  Menu.update(
+    {
+      _id: req.body._id
+    }, {
+      menuName: req.body.menuName,
+      menuValue: req.body.menuValue,
+      updatedAt: Date.now()
+    }
+  )
+  .then(data => {
+    if (data.nModified === 1) {
+      result.success(res, true);
+    }
+  })
+  .catch(e => {
+    next(e);
+  });
+}
 
 /**
  * Get menu list.
@@ -30,7 +49,6 @@ function create(req, res, next) {
 function list(req, res, next) {
   Daos.getAll(Menu)
       .then(datas => {
-        console.log('获取Menu成功--');
         result.success(res, datas ? datas : []);
       })
       .catch(e => { 
@@ -40,4 +58,4 @@ function list(req, res, next) {
 }
 
 
-module.exports =  { create, list };
+module.exports =  { create, list, update };

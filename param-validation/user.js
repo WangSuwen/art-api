@@ -42,12 +42,5 @@ module.exports =  {
     query: {
       userId: Joi.string().required()
     }
-  },
-  // 添加 菜单
-  addMenus: {
-    body: {
-      menuName: Joi.string().required(),
-      menuValue: Joi.string().required()
-    }
   }
 };
