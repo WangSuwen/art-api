@@ -41,8 +41,12 @@ app.use(compress());
 
 // secure apps by setting various HTTP headers
 app.use(helmet());
+
+/**
+ * 跨域设置 -- START
+ */
 let getterOrigin;
-const whitelist = ['loveruoxi.com', 'http://localhost:9527', 'http://127.0.0.1:9527']
+const whitelist = ['loveruoxi.com', 'http://localhost:9527', 'http://127.0.0.1:9527'];
 var corsOptions = {
   origin: function (origin, callback) {
     let reg;
@@ -57,21 +61,19 @@ var corsOptions = {
       }
     }
     isCORS && callback(new Error('Not allowed by CORS'))  
-    // if (whitelist.indexOf(origin) !== -1) {
-    //   callback(null, true)
-    // } else {
-    //   callback(new Error('Not allowed by CORS'))
-    // }
   },
   methods: ['OPTION', 'GET', 'PUT', 'POST'],
   credentials: true
-}
+};
 
-// enable CORS - Cross Origin Resource Sharing
 app.use(function (req, res, next) {
   getterOrigin = req.headers.origin || req.headers.referer;
   next();
 }, cors(corsOptions));
+
+/**
+ * 跨域设置 -- END
+ */
 
 // enable detailed API logging in dev env
 if (config.env === 'development') {
