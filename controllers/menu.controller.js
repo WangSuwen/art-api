@@ -21,7 +21,7 @@ function create(req, res, next) {
       next(e)
     });
 }
-// 
+// 更新
 function update(req, res, next) {
   Menu.update(
     {
@@ -43,6 +43,24 @@ function update(req, res, next) {
 }
 
 /**
+ * 删除
+ */
+function deleteMenu(req, res, next) {
+  const _id = req.body._id;
+  Menu.deleteOne({ _id }, (err, data) => {
+    if (err) {
+      next(err);
+    } else {
+      if (data.ok === 1) {
+        result.success(res, data);
+      } else {
+        result.failed(res, result.DELETE_FAILED);
+      }
+    }
+  })
+}
+
+/**
  * Get menu list.
  * @returns {Menu[]}
  */
@@ -58,4 +76,4 @@ function list(req, res, next) {
 }
 
 
-module.exports =  { create, list, update };
+module.exports =  { create, list, update, deleteMenu };

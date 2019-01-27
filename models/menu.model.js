@@ -19,8 +19,10 @@ const MenuSchema = new mongoose.Schema({
     default: Date.now
   },
   updatedAt: {
-    type: Date,
-    default: Date.now
+    type: Date
+  },
+  deletedAt: {
+    type: Date
   }
 });
 

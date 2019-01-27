@@ -7,8 +7,10 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 router.route('/')
   .post(validate(paramValidation.addMenus), menuCtrl.create)
-  .get(menuCtrl.list);
+  .get(menuCtrl.list)
+  .delete(menuCtrl.deleteMenu);
 
 router.post('/update', validate(paramValidation.updateMenus), menuCtrl.update);
+router.post('/delete', menuCtrl.deleteMenu);
 
 module.exports = router;
