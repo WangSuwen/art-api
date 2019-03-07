@@ -7,10 +7,10 @@ const Daos = {
   getById(model, id) {
     return model.findById(id).exec();
   },
-  list (model, limit, skip, sort = {createdAt: -1}) {
+  list (model, limit, skip, sort = {createdAt: -1}, fields) {
     return Promise.all([
       model.estimatedDocumentCount(),
-      model.find().sort(sort).skip(skip).limit(limit).exec()
+      model.find({}, fields).sort(sort).skip(skip).limit(limit).exec()
     ]);
   },
   /**

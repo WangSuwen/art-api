@@ -72,14 +72,10 @@ function list(req, res, next) {
       .then(datas => {
         console.log('获取UserList成功--');
         const userList = datas[1].map(user => {
-          return result.formatResData(user, ['mobileNumber', 'avatar', 'introduction', 'name', '_id']); 
-        });
-        const userObj = {};
-        userList.forEach(user => {
-          userObj[user._id] = user;
+          return result.formatResData(user, ['mobileNumber', 'avatar', 'introduction', 'name', 'password', '_id', 'createdAt', 'updatedAt']); 
         });
         result.success(res, {
-          list: userObj,
+          list: userList,
           currentPage: +currentPage,
           limit: limit,
           pageSize: Math.ceil(datas[0] / limit)
