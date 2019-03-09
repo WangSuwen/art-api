@@ -8,9 +8,9 @@ const httpStatus = require('http-status');
 const expressWinston = require('express-winston');
 const expressValidation = require('express-validation');
 const helmet = require('helmet');
-const winstonInstance = require('../config/winston');
+const winstonInstance = require('./winston');
 const routes = require('../routes/index');
-const config = require('../config/env');
+const config = require('./env');
 const APIError = require('../helpers/APIError');
 const socketIO = require('../socket');
 
