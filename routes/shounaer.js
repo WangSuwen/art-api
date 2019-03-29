@@ -36,7 +36,7 @@ router.post('/api/app/v350/remind-update', (req, res) => {
   });
 });
 // GET 获取提醒列表（根据提醒完成类型进行分页查询）
-router.post('/api/app/v350/remind-list', (req, res) => {
+router.get('/api/app/v350/remind-list', (req, res) => {
   result.success(res, {
       "code": "200",
       "data": {
@@ -124,7 +124,7 @@ router.post('/api/app/v350/remind-list', (req, res) => {
     });
 });
 // GET 获取提醒详情
-router.post('/api/app/v350/remind-detail', (req, res) => {
+router.get('/api/app/v350/remind-detail', (req, res) => {
   result.success(res, {
     "code": "200",
     "data": {
@@ -188,7 +188,7 @@ router.post('/api/app/v350/remind-detail', (req, res) => {
   });
 });
 // GET 提醒标记为已完成
-router.post('/api/app/v350/remind-done', (req, res) => {
+router.get('/api/app/v350/remind-done', (req, res) => {
   result.success(res, {
       "code": "200",
       "data": {
@@ -198,7 +198,7 @@ router.post('/api/app/v350/remind-done', (req, res) => {
   });
 });
 // GET 判断是否需要弹框
-router.post('/api/app/v350/remind-done', (req, res) => {
+router.get('/api/app/v350/remind-done', (req, res) => {
   result.success(res, {
       "code": "200",
       "data": {
