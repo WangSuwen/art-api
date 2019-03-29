@@ -2,7 +2,8 @@ const codeMap = {
   CUSTOM_ERROR: { code: 10000, msg: '自定义错误'},
   SYSTEM_ERROR: { code: 10001, msg: '系统错误'},
   AUTH_FAILED: { code: 20000, msg: '登录已过期'},
-  DELETE_FAILED: { code: 30000, msg: '删除失败'}
+  DELETE_FAILED: { code: 30000, msg: '删除失败'},
+  REMIND_NOT_EXIST: { code: 6001, msg: '该提醒不存在'}
 };
 
 const Result = {
