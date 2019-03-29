@@ -4,6 +4,7 @@ const authRoutes = require('./auth');
 const userMenuRoutes = require('./userMenu');
 const menusRoutes = require('./menus');
 const monitorRoutes = require('./monitor');
+const shounaerRoutes = require('./shounaer');
 const { loginCheck } = require('./loginStatusCheck');
 
 const router = express.Router(); // eslint-disable-line new-cap
@@ -25,5 +26,7 @@ router.use('/userMenu', loginCheck, userMenuRoutes);
 router.use('/menus', loginCheck, menusRoutes);
 // 错误监控
 router.use('/monitor', monitorRoutes);
+// 收哪儿的接口
+router.use('/shounaer', shounaerRoutes);
 
 module.exports = router;
