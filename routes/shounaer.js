@@ -7,6 +7,7 @@ const remindList = require('../mock/remind-list');
 const remindDetail = require('../mock/remind-detail');
 const categories = require('../mock/categories');
 const remindAuto = require('../mock/remind-auto');
+const objectList = require('../mock/object-list');
 
 
 // POST 添加提醒
@@ -42,6 +43,10 @@ router.get('/api/app/v350/remind-dialog', (req, res) => {
 // GET 添加提醒 -- 关联物品时获取 已添加的分类列表
 router.get('/api/app/v350/categories', (req, res) => {
     result.success(res, categories);
+});
+// GET 添加提醒 -- 物品列表
+router.get('/api/app/v350/object-list', (req, res) => {
+    result.success(res, objectList);
 });
 // GET 自动添加提醒
 router.get('/api/app/v350/remind-auto', (req, res) => {
