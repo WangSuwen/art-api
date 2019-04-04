@@ -6,6 +6,7 @@ const addRemind = require('../mock/add-remind');
 const remindList = require('../mock/remind-list');
 const remindDetail = require('../mock/remind-detail');
 const categories = require('../mock/categories');
+const remindAuto = require('../mock/remind-auto');
 
 
 // POST 添加提醒
@@ -42,6 +43,9 @@ router.get('/api/app/v350/remind-dialog', (req, res) => {
 router.get('/api/app/v350/categories', (req, res) => {
     result.success(res, categories);
 });
-
+// GET 自动添加提醒
+router.get('/api/app/v350/remind-auto', (req, res) => {
+  result.success(res, remindAuto);
+});
 
 module.exports = router;
