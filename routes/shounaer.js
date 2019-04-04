@@ -13,8 +13,8 @@ router.post('/api/app/v350/remind', (req, res) => {
   result.success(res, addRemind);
 });
 
-// DELETE 删除某个提醒
-router.delete('/api/app/v350/remind', (req, res) => {
+// POST 删除某个提醒
+router.post('/api/app/v350/remind-delete', (req, res) => {
   result.success(res, result.REMIND_NOT_EXIST);
 });
 
