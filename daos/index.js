@@ -1,9 +1,6 @@
 const Promise = require('bluebird');
 
 const Daos = {
-  save (model, ) {
-
-  },
   getById(model, id) {
     return model.findById(id).exec();
   },
@@ -23,9 +20,10 @@ const Daos = {
   /**
    * @param {*} model 
    * @param {*Object} query 
+   * @param {*Object} fields 需要查询的字段 
    */
-  getOne(model, query) {
-    return model.findOne(query).exec();
+  getOne(model, query, fields) {
+    return model.findOne(query, fields).exec();
   }
 };
 
