@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "name": "artApi",
+      "script": "bin/server.js",
+      "watch": false,
+      "max_memory_restart": "300M",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss"
+    }
+  ]
+}

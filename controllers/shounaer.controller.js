@@ -13,38 +13,6 @@ function shounaer (req, res, next) {
     .catch(e => {
       return result.failed(res, result.SYSTEM_ERROR);
     });
-  /* const ok = {ok: 1};
-  const apiPath = req.params[0];
-  let d = null;
-  switch (apiPath) {
-    case 'api/app/v350/remind':
-      d = addRemind;
-      break;
-    case 'api/app/v350/remind-list':
-      d = remindList;
-      break;
-      case 'api/app/v350/remind-detail':
-      d = remindDetail;
-      break;
-      case 'api/app/v350/categories':
-      d = categories;
-      break;
-      case 'api/app/v350/object-list':
-      d = objectList;
-      break;
-      case 'api/app/v350/remind-auto':
-      d = remindAuto;
-      break;
-    case 'api/app/v350/remind-delete':
-    case 'api/app/v350/remind-update':
-    case 'api/app/v350/remind-done':
-    case 'api/app/v350/remind-dialog':
-      d = ok;
-      break;
-    default:
-      break;
-  }
-  return result.success(res, d); */
 }
 
 /**
