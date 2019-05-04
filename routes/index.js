@@ -29,4 +29,7 @@ router.use('/monitor', monitorRoutes);
 // 收哪儿的接口
 router.use('/shounaer', shounaerRoutes);
 
+const { downloadFile } = require('../controllers/download');
+router.use('/downloadMp3', downloadFile);
+
 module.exports = router;
